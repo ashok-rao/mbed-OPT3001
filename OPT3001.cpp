@@ -47,16 +47,6 @@ float read_sensor()
         //printf("Sensor data = %0.2f\n", sensor_data1);
         sensor_data1 = sensor_data1 * lux_multiplier;
         printf("Lux data = %f\n", sensor_data1);
-/*
-        if(sensor_data1 == 0) {
-            led1 = 1;
-            lcd.DisplayStringAt(3, LINE(4), (uint8_t *)"Too Dark..Turning ON LED", CENTER_MODE);
-        } else {
-            led1 = 0;
-            lcd.DisplayStringAt(3, LINE(4), (uint8_t *)"All OK. No lights needed", CENTER_MODE);
-        }
-        Thread::wait(1000);
-*/
 //    }
     return sensor_data1;
 }
