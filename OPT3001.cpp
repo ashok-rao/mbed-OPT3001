@@ -4,8 +4,9 @@ uint16_t deviceID = 0
 uint16_t sensor_data = 0;
 float sensor_data1 = 0.0;
 char temp_write[3] = {0,0,0};
-float lux_multiplier = 10.24; //Range set to RN[3:0] = 1010 in config register
+float lux_multiplier = 10.24; //Range set to RN[3:0] = 1010 in config register. Refer datasheet for lux_multiplier options.
 
+//I2C peripheral pins on the STM32F7-DISCOVERY board.
 I2C i2c(PB_9, PB_8);
 
 void read_sensor()
@@ -21,18 +22,20 @@ void read_sensor()
     //printf("a ====== %d",a);
 
     //Read Device ID
-    temp_write[0] = 0x7F; //device ID register address
+    temp_write[0] = 0x7F; //device ID register address from datasheet
     char data[2] = {0,0};
     i2c.write(address, temp_write, 1, false);
     int b = i2c.read(address, data, 2, 0);
     //printf("b ======= =  == == %d", b);
     deviceID = (((uint16_t)data[0]) << 8) | data[1];
     //printf("Device ID= %d\n", deviceID);
-    if(deviceID == 0x3001) { //12289d (3001h) = device ID from datasheet
+    if(deviceID == 0x3001) { //12289d (3001h) = device ID from datasheet. Factory programmed.
         printf("Device ID OK.....");        
     }
     
-    //From datasheet: Read result register (mask bits 15:13 - AND with suitable mask) & Multiply contents by lux_multiply factor to get reading.
+    //From datasheet: Read result register (mask bits 15:13 - AND with suitable mask) & Multiply contents by 
+    //lux_multiply factor to get reading. This configuration of the sensor is achieved because of the exponent in the configuration
+    //register being set to 0's.
     while(1) {
         temp_write[0] = 0x00; //result register address
         char opt_data[2] = {0,0};
