@@ -30,7 +30,7 @@ void read_sensor()
     deviceID = (((uint16_t)data[0]) << 8) | data[1];
     //printf("Device ID= %d\n", deviceID);
     if(deviceID == 0x3001) { //12289d (3001h) = device ID from datasheet. Factory programmed.
-        printf("Device ID OK.....");        
+        printf("Device ID OK.....");      
     }
     
     //From datasheet: Read result register (mask bits 15:13 - AND with suitable mask) & Multiply contents by 
