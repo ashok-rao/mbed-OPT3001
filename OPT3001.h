@@ -5,4 +5,4 @@
 //mbed I2C API use 7 bit address, hence left shift the 8-bit address by 1 bit.
 const int address = 0x47 << 1;
 
-void read_sensor();
+float read_sensor();
