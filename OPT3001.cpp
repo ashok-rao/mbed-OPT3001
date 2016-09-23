@@ -9,7 +9,7 @@ float lux_multiplier = 10.24; //Range set to RN[3:0] = 1010 in config register. 
 //I2C peripheral pins on the STM32F7-DISCOVERY board.
 I2C i2c(PB_9, PB_8);
 
-void read_sensor()
+float read_sensor()
 {
     printf("Inside read sensor..");
     i2c.frequency(400000);
@@ -36,7 +36,7 @@ void read_sensor()
     //From datasheet: Read result register (mask bits 15:13 - AND with suitable mask) & Multiply contents by 
     //lux_multiply factor to get reading. This configuration of the sensor is achieved because of the exponent in the configuration
     //register being set to 0's.
-    while(1) {
+//    while(1) {
         temp_write[0] = 0x00; //result register address
         char opt_data[2] = {0,0};
         i2c.write(address, temp_write, 1, false);
@@ -57,5 +57,6 @@ void read_sensor()
         }
         Thread::wait(1000);
 */
-    }
+//    }
+    return sensor_data1;
 }
