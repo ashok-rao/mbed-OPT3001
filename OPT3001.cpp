@@ -1,6 +1,6 @@
 #include "OPT3001.h"
 
-uint16_t deviceID = 0
+uint16_t deviceID = 0;
 uint16_t sensor_data = 0;
 float sensor_data1 = 0.0;
 char temp_write[3] = {0,0,0};
