@@ -10,7 +10,7 @@ float lux_multiplier = 10.24; //Range set to RN[3:0] = 1010 in config register. 
 I2C i2c(PB_9, PB_8);
 
   //Read Device ID
- void read_DeviceID() {
+void read_DeviceID() {
     temp_write[0] = 0x7F; //device ID register address from datasheet
     char data[2] = {0,0};
     i2c.write(address, temp_write, 1, false);
@@ -24,10 +24,10 @@ I2C i2c(PB_9, PB_8);
  }
     
 
-float read_sensor()
-{
+float read_sensor() {
+
     //printf("Inside read sensor..");
-    i2c.frequency(400000);
+    //i2c.frequency(400000);
     //Configure light sensor
     temp_write[0]=0x01;
     temp_write[1]=0xAE; //C810h is the default content for configuration register (address=01h) (Current cofig = AE0C)
